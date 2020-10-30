@@ -1,0 +1,4 @@
+export const PAGE = {
+  TODO_LIST: "TODO_LIST",
+  TEXT_CONTENT: "TEXT_CONTENT",
+};
