@@ -18,12 +18,9 @@ import { PAGE } from "../pageType";
 import { Button } from "@material-ui/core";
 import { Add, Save, Delete, Cancel, Edit, ArrowBack } from "@material-ui/icons";
 
-// const Footer = ({ inputTitleRef }) => {
 const Footer = () => {
   const dispatch = useDispatch();
-  // const newTodoSaver = useNewTodoSaver(inputTitleRef);
   const newTodoSaver = useNewTodoSaver();
-  // const afterAnimation = useAfterAnimation();
   const isEditing = useSelector((state) => state.todoList.isEditing);
   const seletedTodoTitle = useSelector((state) => state.selected.todo.title);
   const mobileMode = useSelector((state) => state.window.mobileMode);
@@ -76,11 +73,9 @@ const Footer = () => {
   };
 
   const handleBack = () => {
-    // afterAnimation(() => {
     let saveSuccess = false;
     if (isEditing) saveSuccess = newTodoSaver();
     if (!isEditing || saveSuccess) dispatch(setCurrentPage(PAGE.TODO_LIST));
-    // });
   };
 
   return (
