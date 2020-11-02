@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateNewTodoDate } from "../../actions";
 import { TextField } from "@material-ui/core";
 import { inputPropsStyle } from "../../config";
+// Hooks
+import useSelectedTodo from "../../hooks/useSelectedTodo";
 const DateField = () => {
   const dispatch = useDispatch();
   const isEditing = useSelector((state) => state.todoList?.isEditing);
   const newTodo = useSelector((state) => state.todoList.newTodo);
-  const todoList = useSelector((state) => state.todoList?.todoList);
   const selectedTodoTitle = useSelector((state) => state.selected.todo.title);
-  const [selectedTodoDate, setSelectedTodoDate] = useState("");
+  const { selectedTodo } = useSelectedTodo();
 
-  useEffect(() => {
-    // Display selected todo
-    const selectedTodo = todoList.filter(
-      (todo) => todo.title === selectedTodoTitle
-    )[0];
-    setSelectedTodoDate(selectedTodo?.date);
-  }, [selectedTodoTitle, todoList]);
-
-  const date = isEditing ? newTodo.date : selectedTodoDate || "";
+  const date = isEditing ? newTodo.date : selectedTodo.date || "";
   const disabledOnTodoSelected = selectedTodoTitle ? true : false;
   return (
     <TextField
