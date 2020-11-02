@@ -5,6 +5,8 @@ import { TextField } from "@material-ui/core";
 import { inputPropsStyle } from "../../config";
 // Hooks
 import useSelectedTodo from "../../hooks/useSelectedTodo";
+// Configs
+import { DATE_INPUT_RANGE } from "../../config";
 const DateField = () => {
   const dispatch = useDispatch();
   const isEditing = useSelector((state) => state.todoList?.isEditing);
@@ -21,8 +23,8 @@ const DateField = () => {
       type="date"
       onChange={(e) => dispatch(updateNewTodoDate(e.target.value))}
       value={date}
-      min="2000-1-1"
-      max="2100-12-31"
+      min={DATE_INPUT_RANGE.MIN}
+      max={DATE_INPUT_RANGE.MAX}
       disabled={disabledOnTodoSelected}
     />
   );

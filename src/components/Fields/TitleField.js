@@ -26,6 +26,7 @@ const TitleField = () => {
 
   const disabledOnTodoSelected = selectedTodo.title ? true : false;
   const title = isEditing ? newTodo.title : selectedTodo.title || "";
+  const label = isEditing ? "Title" : " ";
   return (
     <TextField
       inputRef={inputTitleRef}
@@ -36,7 +37,7 @@ const TitleField = () => {
       placeholder="New Title"
       onChange={(e) => dispatch(updateNewTodoTitle(e.target.value))}
       value={title}
-      label={isEditing ? "Title" : " "}
+      label={label}
       disabled={disabledOnTodoSelected}
     />
   );

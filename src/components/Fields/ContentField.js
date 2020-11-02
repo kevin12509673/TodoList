@@ -12,9 +12,10 @@ const ContentField = () => {
 
   const disabledOnTodoSelected = selectedTodo.title ? true : false;
   const content = isEditing ? newTodo.content : selectedTodo.content || "";
+  const placeholder = isEditing ? "Enter your todo items!" : "";
   return (
     <textarea
-      placeholder={isEditing ? "Enter your todo items!" : ""}
+      placeholder={placeholder}
       onChange={(e) => dispatch(updateNewTodoContent(e.target.value))}
       value={content}
       disabled={disabledOnTodoSelected}

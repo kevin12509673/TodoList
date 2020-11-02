@@ -13,3 +13,5 @@ export const inputPropsStyle = {
   lineHeight: "1.5rem",
   fontSize: "1.5rem",
 };
+
+export const DATE_INPUT_RANGE = { MIN: "2000-1-1", MAX: "2100-12-31" };
