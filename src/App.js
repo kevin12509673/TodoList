@@ -4,14 +4,13 @@ import { updateWidth, toggleMobileMode } from "./actions";
 
 //import components
 import Header from "./components/Header";
-import LeftPanel from './components/LeftPanel';
+import LeftPanel from "./components/LeftPanel";
 import Footer from "./components/Footer";
 import TextContent from "./components/TextContent";
 
 import "./App.css";
 
 function App() {
-  // const inputTitleRef = useRef();
   const dispatch = useDispatch();
 
   const handleResize = useCallback(() => {
@@ -31,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <LeftPanel/>
+      <LeftPanel />
       <TextContent />
       <Footer />
     </div>
