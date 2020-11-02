@@ -5,3 +5,7 @@ export const FILTER_OPTIONS = {
   TITLE_ASCENDING: "Title(Ascending)",
   TITLE_DECENDING: "Title(Decending)",
 };
+export const styleOption = {
+  display: { display: "Display" },
+  flexDirection: { flexDirection: "flexDirection" },
+};
