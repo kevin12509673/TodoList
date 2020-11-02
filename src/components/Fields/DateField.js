@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNewTodoDate } from "../actions";
+import { updateNewTodoDate } from "../../actions";
 import { TextField } from "@material-ui/core";
-import { inputPropsStyle } from "../config";
+import { inputPropsStyle } from "../../config";
 const DateField = () => {
   const dispatch = useDispatch();
   const isEditing = useSelector((state) => state.todoList?.isEditing);
@@ -19,7 +19,7 @@ const DateField = () => {
     setSelectedTodoDate(selectedTodo?.date);
   }, [selectedTodoTitle, todoList]);
 
-  const displayDate = isEditing ? newTodo.date : selectedTodoDate || "";
+  const date = isEditing ? newTodo.date : selectedTodoDate || "";
   const disabledOnTodoSelected = selectedTodoTitle ? true : false;
   return (
     <TextField
@@ -27,7 +27,7 @@ const DateField = () => {
       inputProps={{ style: inputPropsStyle }}
       type="date"
       onChange={(e) => dispatch(updateNewTodoDate(e.target.value))}
-      value={displayDate}
+      value={date}
       min="2000-1-1"
       max="2100-12-31"
       disabled={disabledOnTodoSelected}

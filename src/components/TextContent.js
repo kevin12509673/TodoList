@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 // Components
-import TitleField from "./TitleField";
-import DateField from "./DateField";
-import ContentField from "./ContentField";
+import TitleField from "./Fields/TitleField";
+import DateField from "./Fields/DateField";
+import ContentField from "./Fields/ContentField";
 
 // Const
 import { PAGE } from "../pageType";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateNewTodoContent } from "../actions";
+import { updateNewTodoContent } from "../../actions";
 
 const ContentField = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const ContentField = () => {
   }, [selectedTodoTitle, todoList]);
 
   const disabledOnTodoSelected = selectedTodoTitle ? true : false;
-  const displayContent = isEditing
+  const content = isEditing
     ? newTodo.content
     : selectedTodoContent
     ? selectedTodoContent
@@ -28,7 +28,7 @@ const ContentField = () => {
     <textarea
       placeholder={isEditing ? "Enter your todo items!" : ""}
       onChange={(e) => dispatch(updateNewTodoContent(e.target.value))}
-      value={displayContent}
+      value={content}
       disabled={disabledOnTodoSelected}
     />
   );

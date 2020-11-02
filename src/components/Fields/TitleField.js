@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNewTodoTitle } from "../actions";
-import useInputFocuser from "../hooks/useInputFocuser";
-import { inputPropsStyle } from "../config";
+import { updateNewTodoTitle } from "../../actions";
+import useInputFocuser from "../../hooks/useInputFocuser";
+import { inputPropsStyle } from "../../config";
 
 import { TextField } from "@material-ui/core";
 
@@ -23,7 +23,7 @@ const TitleField = () => {
   }, [shouldFocusInputTitle, inputTitleRef, inputFocuser]);
 
   const disabledOnTodoSelected = selectedTodoTitle ? true : false;
-  const displayTitle = isEditing
+  const title = isEditing
     ? newTodo.title
     : selectedTodoTitle
     ? selectedTodoTitle
@@ -37,7 +37,7 @@ const TitleField = () => {
       type="text"
       placeholder="New Title"
       onChange={(e) => dispatch(updateNewTodoTitle(e.target.value))}
-      value={displayTitle}
+      value={title}
       label={isEditing ? "Title" : " "}
       disabled={disabledOnTodoSelected}
     />
