@@ -25,28 +25,26 @@ const TextContent = () => {
 
   // Edit new todo
   const isEditing = useSelector((state) => state.todoList?.isEditing);
-  const newTodoTitle = useSelector((state) => state.todoList?.newTodo.title);
-  const newTodoContent = useSelector(
-    (state) => state.todoList?.newTodo.content
-  );
-  const newTodoDate = useSelector((state) => state.todoList?.newTodo.date);
+  const newTodo = useSelector((state) => state.todoList.newTodo);
 
-  // Selet existing todo
+  // Select existing todo
   const todoList = useSelector((state) => state.todoList?.todoList);
   const selectedTodoTitle = useSelector((state) => state.selected.todo.title);
   const [selectedTodoContent, setSelectedTodoContent] = useState("");
   const [selectedTodoDate, setSelectedTodoDate] = useState("");
 
-  // Set focus
+  // Focus state
   const shouldFocusInputTitle = useSelector(
     (state) => state.shouldFocus.inputTitle
   );
 
   useEffect(() => {
+    // Set focus on input
     if (shouldFocusInputTitle) inputFocuser(inputTitleRef);
   }, [shouldFocusInputTitle, inputTitleRef, inputFocuser]);
 
   useEffect(() => {
+    // Display selected todo
     const selectedTodo = todoList.filter(
       (todo) => todo.title === selectedTodoTitle
     )[0];
@@ -54,87 +52,73 @@ const TextContent = () => {
     setSelectedTodoDate(selectedTodo?.date);
   }, [selectedTodoTitle, todoList]);
 
-  // const toggleContentDisplay =
-  //   selectedTodoTitle || isEditing ? { display: "block" } : { display: "none" };
-  const toggleContentDisplay = {
-    display: selectedTodoTitle || isEditing ? "block" : "none",
-  };
+  // Logical element
+  const displayTitle = isEditing
+    ? newTodo.title
+    : selectedTodoTitle
+    ? selectedTodoTitle
+    : "";
+  const displayDate = isEditing ? newTodo.date : selectedTodoDate || "";
+  const displayContent = isEditing
+    ? newTodo.content
+    : selectedTodoContent
+    ? selectedTodoContent
+    : "";
+  const disabledOnTodoSelected = selectedTodoTitle ? true : false;
 
-  // const togglePageDisplay =
-  //   currentPage === PAGE.TEXT_CONTENT || !mobileMode
-  //     ? { display: "block" }
-  //     : { display: "none" };
-  const togglePageDisplay = {
+  // Style
+  const togglePageDisplayStyle = {
     display:
       currentPage === PAGE.TEXT_CONTENT || !mobileMode ? "block" : "none",
   };
-
-  const toggleContentHeaderFlex = {
+  const toggleContentDisplayStyle = {
+    display: selectedTodoTitle || isEditing ? "block" : "none",
+  };
+  const toggleContentHeaderFlexStyle = {
     flexDirection:
       currentPage === PAGE.TEXT_CONTENT && mobileMode ? "column" : "row",
   };
-
   const inputPropsStyle = {
     lineHeight: "1.5rem",
     fontSize: "1.5rem",
   };
 
   return (
-    <div className="text-content" style={togglePageDisplay}>
+    <div className="text-content" style={togglePageDisplayStyle}>
       {
-        <div className="content-wrapper" style={toggleContentDisplay}>
+        <div className="content-wrapper" style={toggleContentDisplayStyle}>
           <div
             className="content-header-wrapper"
-            style={toggleContentHeaderFlex}
+            style={toggleContentHeaderFlexStyle}
           >
             <TextField
               inputRef={inputTitleRef}
               className="content-title"
-              inputProps={{
-                style: inputPropsStyle,
-              }}
-              InputLabelProps={{
-                style: inputPropsStyle,
-              }}
+              inputProps={{ style: inputPropsStyle }}
+              InputLabelProps={{ style: inputPropsStyle }}
               type="text"
               placeholder="New Title"
               onChange={(e) => dispatch(updateNewTodoTitle(e.target.value))}
-              value={
-                isEditing
-                  ? newTodoTitle
-                  : selectedTodoTitle
-                  ? selectedTodoTitle
-                  : ""
-              }
+              value={displayTitle}
               label={isEditing ? "Title" : " "}
-              disabled={selectedTodoTitle ? true : false}
+              disabled={disabledOnTodoSelected}
             />
             <TextField
               className="content-date"
-              inputProps={{
-                style: { lineHeight: "1.5rem", fontSize: "1.5rem" },
-              }}
+              inputProps={{ style: inputPropsStyle }}
               type="date"
-              onChange={(e) => {
-                dispatch(updateNewTodoDate(e.target.value));
-              }}
-              value={isEditing ? newTodoDate : selectedTodoDate || ""}
+              onChange={(e) => dispatch(updateNewTodoDate(e.target.value))}
+              value={displayDate}
               min="2000-1-1"
               max="2100-12-31"
-              disabled={selectedTodoTitle ? true : false}
+              disabled={disabledOnTodoSelected}
             />
           </div>
           <textarea
             placeholder={isEditing ? "Enter your todo items!" : ""}
             onChange={(e) => dispatch(updateNewTodoContent(e.target.value))}
-            value={
-              isEditing
-                ? newTodoContent
-                : selectedTodoContent
-                ? selectedTodoContent
-                : ""
-            }
-            disabled={selectedTodoTitle}
+            value={displayContent}
+            disabled={disabledOnTodoSelected}
           />
         </div>
       }
