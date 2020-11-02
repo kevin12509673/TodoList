@@ -74,6 +74,11 @@ const TextContent = () => {
       currentPage === PAGE.TEXT_CONTENT && mobileMode ? "column" : "row",
   };
 
+  const inputPropsStyle = {
+    lineHeight: "1.5rem",
+    fontSize: "1.5rem",
+  };
+
   return (
     <div className="text-content" style={togglePageDisplay}>
       {
@@ -86,10 +91,10 @@ const TextContent = () => {
               inputRef={inputTitleRef}
               className="content-title"
               inputProps={{
-                style: { lineHeight: "1.5rem", fontSize: "1.5rem" },
+                style: inputPropsStyle,
               }}
               InputLabelProps={{
-                style: { lineHeight: "1.5rem", fontSize: "1.5rem" },
+                style: inputPropsStyle,
               }}
               type="text"
               placeholder="New Title"
