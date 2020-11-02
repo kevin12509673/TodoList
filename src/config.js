@@ -9,3 +9,7 @@ export const styleOption = {
   display: { display: "Display" },
   flexDirection: { flexDirection: "flexDirection" },
 };
+export const inputPropsStyle = {
+  lineHeight: "1.5rem",
+  fontSize: "1.5rem",
+};
