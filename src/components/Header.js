@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header>
       <img src={cat} alt="" />
-      <span>Todo List</span>
+      <span>Memo List</span>
     </header>
   );
 };
